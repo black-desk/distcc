@@ -500,7 +500,6 @@ DumpEnvironmentVariables() {
   if [ -n "$DISTCC_HOSTS" ]; then
     echo export DISTCC_HOSTS=\'$DISTCC_HOSTS\'
   fi
-  echo export PATH=\'$distcc_location:$PATH\'
 }
 
 Main() {
@@ -540,8 +539,7 @@ Main() {
       Announce
       StartIncludeServerAndDetermineHosts || exit 1
       # Now execute the command that is the argument of 'pump'.
-      PATH="$distcc_location:$PATH" \
-        "$@"
+      "$@"
       # When we exit, the ShutDown function will be called.
       ;;
   esac
