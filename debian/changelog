@@ -1,3 +1,13 @@
+distcc (3.4+really3.4-4build3blackdesk1) noble; urgency=medium
+
+  * Import some patches from upstream unreleased commits
+    to fix distcc-pump for python 3.12
+  * Fix debian/rules to update include_server path
+  * Do not update PATH in distcc-pump.
+  * This is just a temporary personal use fix will not push to debian community.
+
+ -- Chen Linxuan <me@black-desk.cn>  Fri, 14 Feb 2025 18:04:34 +0800
+
 distcc (3.4+really3.4-4build3) noble; urgency=medium
 
   * No-change rebuild for CVE-2024-3094
