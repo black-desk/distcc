@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	--enable-rfc2553 --disable-Werror --with-gtk --with-auth \
+	--libdir=/usr/lib --libexecdir=/usr/lib INCLUDESERVER_PYTHON=/usr/bin/python3
+
+	sed s/%DEB_HOST_MULTIARCH%/$(DEB_HOST_MULTIARCH)/ \
+	  debian/distcc.triggers.in >debian/distcc.triggers
+	sed s/%DEB_HOST_MULTIARCH%/$(DEB_HOST_MULTIARCH)/ \
+	  debian/update-distcc-symlinks.in >debian/update-distcc-symlinks
+	chmod +x debian/update-distcc-symlinks
+	sed s/%DEB_HOST_MULTIARCH%/$(DEB_HOST_MULTIARCH)/ \
+	  debian/distcc.postinst.in >debian/distcc.postinst
+
+#	exit 1
+
+execute_after_dh_auto_install:
+	mv $(CURDIR)/debian/tmp/usr/local/* $(CURDIR)/debian/tmp/usr/
+	rmdir $(CURDIR)/debian/tmp/usr/local
+
+execute_before_dh_install:
+	dh_installdirs -pdistcc-pump usr/share/man/man1
+
+	mv debian/tmp/usr/bin/pump \
+	   debian/tmp/usr/bin/distcc-pump
+	cp man/pump.1 \
+	   debian/distcc-pump/usr/share/man/man1/distcc-pump.1
+
+	rm debian/tmp/usr/share/doc/distcc/README.pump
+	rm debian/tmp/usr/share/doc/distcc/NEWS
+	rm debian/tmp/usr/share/doc/distcc/COPYING
+	rm debian/tmp/usr/share/doc/distcc/INSTALL
+	rm debian/tmp/usr/share/man/man1/pump.1.gz
+	rm debian/tmp/usr/sbin/update-distcc-symlinks
+	rm debian/tmp/etc/default/distcc
+
+	perl -i -pe 's,/usr/local/lib/python3.11/dist-packages/include_server/include_server.py,/usr/lib/python3/dist-packages/include_server/include_server.py,' debian/tmp/usr/bin/distcc-pump
+
+override_dh_python3:
+	dh_python3 -pdistcc-pump
+
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS
+
+override_dh_clean:
+	dh_clean debian/distcc.triggers debian/update-distcc-symlinks \
+	debian/distcc.postinst include_server.egg-info/*
+
+override_dh_auto_test:
+	# The test suite is disabled because it fails due to changes in
+        # compiler output. This is fixed upstream in 3.2rc1.
+        # See: http://code.google.com/p/distcc/issues/detail?id=81

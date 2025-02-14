@@ -1,0 +1,17 @@
+Description: Preferred user is distccd
+ Starting the daemon as root causes it to change user, which
+ should be to "distccd" in Debian.
+Forwarded: not-needed
+Author: Daniel Hartwig <mandyke@gmail.com>
+
+--- a/src/setuid.c
++++ b/src/setuid.c
+@@ -41,7 +41,7 @@
+ #endif
+ #endif
+ 
+-const char *opt_user = "distcc";
++const char *opt_user = "distccd";
+ 
+ 
+ /**
