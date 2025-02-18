@@ -1,0 +1,21 @@
+From: black-desk <me@black-desk.cn>
+Date: Wed, 19 Feb 2025 00:00:44 +0800
+Subject: Fix install prefix
+
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index d2f275e..8daae52 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -1066,7 +1066,7 @@ install-include-server: include-server pump
+ 	        --build-base="$(include_server_builddir)" \
+ 	        --build-temp="$(include_server_builddir)" \
+ 	      install 					\
+-	         --prefix="$(prefix)" 			\
++	         --prefix="$(prefix)/lib/python3/dist-packages"	\
+ 	         --record="$(include_server_builddir)/install.log.pre" \
+ 	         --root="$$DESTDIR"                     \
+ 	    || exit 1; \

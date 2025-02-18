@@ -1,0 +1,28 @@
+Source: distcc
+Section: devel
+Priority: optional
+Maintainer: Chen Linxuan <me@black_desk.cn>
+Rules-Requires-Root: no
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-python3,
+               gdb,
+               gobjc,
+               gobjc++,
+               libavahi-client-dev,
+               libiberty-dev,
+               libkrb5-dev,
+               libpopt-dev,
+               libzstd-dev,
+               po-debconf,
+               python3-dev
+Standards-Version: 4.6.2
+Homepage: https://www.distcc.org/
+Vcs-Browser: https://github.com/black-desk/distcc
+Vcs-Git: https://github.com/black-desk/distcc.git
+
+Package: distcc
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${python3:Depends}, ${shlibs:Depends}
+Description: a fast, free distributed C/C++ compiler
+ Personal distcc package for debian-based distribution.

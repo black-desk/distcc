@@ -1,0 +1,5 @@
+distcc (3.4+git20250218.66bf4c5-1) noble; urgency=medium
+
+  * Initial release.
+
+ -- Chen Linxuan <me@black-desk.cn>  Tue, 18 Feb 2025 15:12:40 +0800

@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --disable-Werror
+
+override_dh_auto_test:
+	dh_auto_test --no-parallel
+
+override_dh_auto_install:
+	fakeroot dh_auto_install
