@@ -1,2 +1,3 @@
 0001-Fix-invalid-escape-sequence-in-tests.patch
 0002-Fix-install-prefix.patch
+0003-Do-not-update-PATH.patch

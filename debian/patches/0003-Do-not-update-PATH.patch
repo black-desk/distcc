@@ -1,0 +1,44 @@
+From: black-desk <me@black-desk.cn>
+Date: Thu, 20 Feb 2025 11:26:01 +0800
+Subject: Do not update PATH
+
+After being packaged, pump is installed in /usr/bin, and distcc,
+lsdistcc will also be installed in /usr/bin.
+---
+ pump.in | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/pump.in b/pump.in
+index 08a32c0..0a996ee 100755
+--- a/pump.in
++++ b/pump.in
+@@ -58,9 +58,8 @@ Description:
+ 
+   The simplest usage is the form "pump COMMAND [ARG...]".
+   This will start an include server for distcc-pump; set some environment
+-  variables; change PATH to use the distcc-pump "distcc" client; execute
+-  COMMAND with the specified ARG(s); and then shutdown the include server.
+-  The COMMAND is typically a parallel build command, such as
++  variables; execute COMMAND with the specified ARG(s); and then shutdown the
++  include server. The COMMAND is typically a parallel build command, such as
+   "make -j80", that will do many concurrent invocations of distcc.
+ 
+   An alternative way of invoking pump is to explicitly invoke "pump --startup"
+@@ -504,7 +503,6 @@ DumpEnvironmentVariables() {
+   if [ -n "$DISTCC_HOSTS" ]; then
+     echo export DISTCC_HOSTS=\'$DISTCC_HOSTS\'
+   fi
+-  echo export PATH=\'$distcc_location:$PATH\'
+ }
+ 
+ Main() {
+@@ -549,8 +547,7 @@ Main() {
+       Announce
+       StartIncludeServerAndDetermineHosts || exit 1
+       # Now execute the command that is the argument of 'pump'.
+-      PATH="$distcc_location:$PATH" \
+-        "$@"
++      "$@"
+       # When we exit, the ShutDown function will be called.
+       ;;
+   esac
