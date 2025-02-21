@@ -3,19 +3,35 @@ Date: Wed, 19 Feb 2025 00:00:44 +0800
 Subject: Fix install prefix
 
 ---
- Makefile.in | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Makefile.in | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile.in b/Makefile.in
-index d2f275e..8daae52 100644
+index d2f275e..a16b9d5 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -1066,7 +1066,7 @@ install-include-server: include-server pump
+@@ -1056,7 +1056,6 @@ install-include-server: include-server pump
+ 	  echo "Not building $@: No suitable python found"; \
+ 	else						\
+ 	  mkdir -p "$(include_server_builddir)" &&      \
+-	  DESTDIR=`cd "$(DESTDIR)/" && pwd` &&            \
+ 	  DISTCC_VERSION="$(VERSION)"			\
+ 	  SRCDIR="$(srcdir)"                            \
+ 	  CFLAGS="$(CFLAGS) $(PYTHON_CFLAGS)"           \
+@@ -1066,9 +1065,14 @@ install-include-server: include-server pump
  	        --build-base="$(include_server_builddir)" \
  	        --build-temp="$(include_server_builddir)" \
  	      install 					\
 -	         --prefix="$(prefix)" 			\
-+	         --prefix="$(prefix)/lib/python3/dist-packages"	\
++	         --install-base="$(prefix)" 		\
++		 --install-purelib="$(prefix)/lib/python3/dist-packages" \
++		 --install-platlib="$(prefix)/lib/python3/dist-packages" \
++		 --install-headers="$(prefix)/include"	\
++		 --install-scripts="$(prefix)/bin"	\
++		 --install-data="$(prefix)/share"	\
  	         --record="$(include_server_builddir)/install.log.pre" \
- 	         --root="$$DESTDIR"                     \
+-	         --root="$$DESTDIR"                     \
++	         --root="$(DESTDIR)"                     \
  	    || exit 1; \
+ 	  sed -e '/^[^\/]/ s,^,/,' \
+ 	      -e 's/\r$$//' \
