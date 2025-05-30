@@ -1,0 +1,19 @@
+Description: IPv6 patch for Zeroconf and IPv6 literals in hosts file
+Bug: http://code.google.com/p/distcc/issues/detail?id=34
+Bug-Debian: http://bugs.debian.org/481951
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/593047
+Origin: upstream, http://code.google.com/p/distcc/source/detail?r=650
+
+--- a/man/distcc.1
++++ b/man/distcc.1
+@@ -534,6 +534,10 @@ hostname.  (This will be slower.)
+ A literal IPv6 address enclosed in square brackets, such as
+ .B [::1]
+ .TP
++.B IPV6
++A literal IPv6 address enclosed in square brackets, such as
++.B [::1]
++.TP
+ .B IPV4
+ A literal IPv4 address, such as 
+ .B 10.0.0.1

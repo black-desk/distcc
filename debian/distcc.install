@@ -1,0 +1,18 @@
+debian/update-distcc-symlinks		usr/sbin
+debian/update-distcc-symlinks.8		usr/share/man/man8
+etc/distcc/clients.allow
+etc/distcc/commands.allow.sh
+etc/distcc/hosts
+usr/bin/distcc
+usr/bin/distccd
+usr/bin/distccmon-text
+usr/bin/lsdistcc
+usr/share/doc/distcc/*.txt
+usr/share/doc/distcc/AUTHORS
+usr/share/doc/distcc/README
+usr/share/doc/distcc/TODO
+usr/share/doc/distcc/example
+usr/share/man/man1/distcc.1.*
+usr/share/man/man1/distccd.1.*
+usr/share/man/man1/distccmon-text.1.*
+usr/share/man/man1/lsdistcc.1.*

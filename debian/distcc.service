@@ -1,0 +1,12 @@
+[Unit]
+Description=Distccd A Distributed Compilation Server
+After=network.target
+
+[Service]
+User=distccd
+EnvironmentFile=-/etc/default/distcc
+ExecStart=/bin/sh -c 'if [ "$ZEROCONF" = "true" ]; then /usr/bin/distccd --daemon --no-detach --allow $ALLOWEDNETS --zeroconf; \
+	else /usr/bin/distccd --daemon --no-detach --allow $ALLOWEDNETS --listen $LISTENER --jobs $JOBS --nice $NICE; fi'
+
+[Install]
+WantedBy=multi-user.target

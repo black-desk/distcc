@@ -1,0 +1,4 @@
+man/distccmon-gnome.1		usr/share/man/man1
+usr/bin/distccmon-gnome
+usr/share/applications/distccmon-gnome.desktop
+usr/share/pixmaps/distccmon-gnome.png
